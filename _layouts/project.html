@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<div class="container">
+    <article class="project">
+        <header class="project-header">
+            <h1 class="project-title">{{ page.title }}</h1>
+            {% if page.date %}
+            <p class="project-meta">
+                {{ page.date | date: "%Y年%m月%d日" }}
+            </p>
+            {% endif %}
+        </header>
+        
+        <div class="project-content">
+            {{ content }}
+        </div>
+        
+        {% if page.technologies %}
+        <div class="project-technologies">
+            <h3>使用技术</h3>
+            <ul>
+                {% for tech in page.technologies %}
+                <li>{{ tech }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        
+        {% if page.links %}
+        <div class="project-links">
+            <h3>相关链接</h3>
+            <ul>
+                {% for link in page.links %}
+                <li><a href="{{ link.url }}" target="_blank">{{ link.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </article>
+</div>

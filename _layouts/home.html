@@ -1,0 +1,56 @@
+---
+layout: default
+---
+
+<section class="hero">
+    <div class="container">
+        <h1>Welcome to My Embedded Blog</h1>
+        <p>分享嵌入式系统开发经验、技术笔记和项目案例</p>
+    </div>
+</section>
+
+<section class="recent-posts">
+    <div class="container">
+        <h2>最新文章</h2>
+        <div class="posts-list">
+            {% for post in paginator.posts %}
+            <article class="post-item">
+                <h3><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h3>
+                <p class="post-meta">{{ post.date | date: "%Y年%m月%d日" }}</p>
+                <p>{{ post.excerpt | strip_html | truncate: 150 }}</p>
+                <a href="{{ post.url | prepend: site.baseurl }}" class="read-more">阅读更多</a>
+            </article>
+            {% endfor %}
+        </div>
+        
+        {% if paginator.total_pages > 1 %}
+        <div class="pagination">
+            {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path }}" class="prev">上一页</a>
+            {% endif %}
+            
+            <span class="page-number">第 {{ paginator.page }} 页，共 {{ paginator.total_pages }} 页</span>
+            
+            {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path }}" class="next">下一页</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="featured-projects">
+    <div class="container">
+        <h2>精选项目</h2>
+        <div class="projects-list">
+            {% assign featured_projects = site.projects | limit: 3 %}
+            {% for project in featured_projects %}
+            <article class="project-item">
+                <h3><a href="{{ project.url | prepend: site.baseurl }}">{{ project.title }}</a></h3>
+                <p>{{ project.excerpt | strip_html | truncate: 100 }}</p>
+                <a href="{{ project.url | prepend: site.baseurl }}" class="view-project">查看项目</a>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>

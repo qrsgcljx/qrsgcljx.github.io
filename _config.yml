@@ -1,0 +1,42 @@
+title: 嵌入式开发者的个人博客
+description: 分享嵌入式系统开发经验、技术笔记和项目案例
+baseurl: ""
+url: "https://qrsqgljx.github.io"
+
+markdown: kramdown
+highlighter: rouge
+
+permalink: /:year/:month/:day/:title/
+
+paginate: 5
+paginate_path: "/page/:num/"
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+
+nav:
+  - title: 首页
+    url: /
+  - title: 博客
+    url: /blog/
+  - title: 项目
+    url: /projects/
+  - title: 关于
+    url: /about/
+
+footer:
+  copyright: "© 2026 嵌入式开发者"
