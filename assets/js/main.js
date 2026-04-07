@@ -26,9 +26,26 @@ window.addEventListener('DOMContentLoaded', function() {
         header.addEventListener('click', function() {
             const content = this.nextElementSibling;
             const btn = this.querySelector('.collapsible-btn');
-            
+
+            const isActive = content.classList.contains('active');
             content.classList.toggle('active');
             btn.classList.toggle('active');
+
+            if (isActive) {
+                content.style.maxHeight = '0px';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        });
+
+        const content = header.nextElementSibling;
+        const images = content ? content.querySelectorAll('img') : [];
+        images.forEach(img => {
+            img.addEventListener('load', function() {
+                if (content.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
         });
     });
 });
