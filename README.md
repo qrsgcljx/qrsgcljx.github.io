@@ -1,111 +1,119 @@
-# 嵌入式开发者博客
+# 嵌入式开发者博客（新手模式）
 
-这是一个基于Jekyll的个人博客，专为嵌入式系统开发者设计。
+这是一个基于 Jekyll 的 GitHub Pages 博客，已经加入“新手模式”脚本。
 
-## 功能特性
+你现在只需要记住：
 
-- 响应式设计，适配不同设备
-- 支持博客文章和项目展示
-- 简洁美观的界面
-- 易于维护和扩展
+1. 新建文章：双击 `scripts/new-post.bat`
+2. 写文章内容：编辑 `_posts` 里新生成的 Markdown 文件
+3. 发布网站：双击 `scripts/publish.bat`
+4. 强制重新发布（无改动也触发构建）：双击 `scripts/force-publish.bat`
 
-## 技术栈
-
-- Jekyll：静态网站生成器
-- HTML5/CSS3：页面结构和样式
-- JavaScript：交互功能
-- Git：版本控制
-- GitHub Pages：部署平台
-
-## 本地开发
-
-1. 安装Jekyll和相关依赖：
-   ```bash
-   gem install jekyll bundler
-   ```
-
-2. 克隆仓库：
-   ```bash
-   git clone https://github.com/qrsgcljx/qrsgcljx.github.io.git
-   cd qrsgcljx.github.io
-   ```
-
-3. 安装依赖：
-   ```bash
-   bundle install
-   ```
-
-4. 启动本地服务器：
-   ```bash
-   bundle exec jekyll serve
-   ```
-
-5. 访问 http://localhost:4000 查看博客
-
-## 部署到GitHub Pages
-
-1. 确保你的仓库名为 `username.github.io`，其中 `username` 是你的GitHub用户名
-
-2. 提交所有更改：
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-3. 等待GitHub Pages构建完成，通常需要几分钟时间
-
-4. 访问 https://username.github.io 查看你的博客
-
-## 如何添加内容
-
-### 添加博客文章
-
-在 `_posts` 目录下创建新的Markdown文件，文件名格式为 `YYYY-MM-DD-title.md`，例如：
-
-```markdown
----
-title: 文章标题
-date: 2026-04-06
-author: 作者名
-tags: [标签1, 标签2]
-excerpt: 文章摘要
 ---
 
-# 文章内容
-...
+## 你要先安装什么
+
+### 1) Git（必须）
+
+- 下载并安装 Git: [https://git-scm.com/download/win](https://git-scm.com/download/win)
+- 安装后重启终端
+
+### 2) （可选）本地预览环境
+
+如果你想在本地看效果，再安装 Ruby + Jekyll：
+
+```powershell
+gem install jekyll bundler
+bundle install
 ```
 
-### 添加项目
+本地预览命令：
 
-在 `_projects` 目录下创建新的Markdown文件，例如：
-
-```markdown
----
-title: 项目标题
-date: 2026-04-06
-technologies:
-  - 技术1
-  - 技术2
-excerpt: 项目摘要
-links:
-  - title: GitHub仓库
-    url: https://github.com/username/project
----
-
-# 项目内容
-...
+```powershell
+bundle exec jekyll serve
 ```
 
-## 自定义配置
+浏览器打开 `http://localhost:4000`
 
-编辑 `_config.yml` 文件可以修改博客的基本设置，如标题、描述、导航菜单等。
+---
 
-## 主题自定义
+## 日常发布流程（最简）
 
-- 修改 `assets/css/style.css` 文件可以自定义样式
-- 修改 `_layouts` 目录下的文件可以自定义页面布局
-- 修改 `_includes` 目录下的文件可以自定义页面组件
+### 第一步：新建文章文件
+
+双击运行：
+
+`scripts/new-post.bat`
+
+脚本会让你输入：
+
+- 标题
+- 标签（可空，英文逗号分隔）
+- 摘要（可空）
+- 作者（可空，默认“嵌入式开发者”）
+
+然后自动在 `_posts` 下生成形如 `YYYY-MM-DD-english-slug.md` 的文件。
+
+### 第二步：写内容
+
+打开刚生成的文件，直接写 Markdown 正文。
+
+### 第三步：一键发布
+
+双击 `scripts/publish.bat`（或在终端运行同名命令）。
+
+它会自动执行：
+
+- `git add .`
+- `git commit -m "..."`
+- `git push origin main`
+
+推送后等待 GitHub Pages 构建，一般 1-3 分钟生效。
+
+### 需要“重新发送/强制重建”时
+
+双击 `scripts/force-publish.bat`。
+
+说明：
+
+- 如果有改动：正常提交并推送
+- 如果没改动：会创建一个空提交并推送，用于强制触发 GitHub Pages 重建
+
+---
+
+## 常见问题
+
+### 1) 双击 `publish.bat` 报错
+
+先确认：
+
+- 已安装 Git
+- 你已完成 `git clone`，并且仓库目录正确
+- 你已经登录或配置好 GitHub 凭据
+
+### 2) 没有变化可提交
+
+脚本会提示“没有检测到变更”，属于正常现象，说明你还没改文件。
+
+### 3) 发布到了错误分支
+
+请把 `scripts/publish.ps1` 里的 `$Branch` 改成你的发布分支（默认是 `main`）。
+
+---
+
+## 目录说明（新手重点）
+
+- `_posts/`：博客文章（你最常编辑）
+- `_projects/`：项目展示
+- `scripts/new-post.ps1`：新建文章脚本
+- `scripts/new-post.bat`：双击新建文章入口
+- `scripts/publish.ps1`：一键发布脚本
+- `scripts/publish.bat`：双击入口
+- `scripts/force-publish.ps1`：强制发布脚本
+- `scripts/force-publish.bat`：双击强制发布入口
+- `templates/post-template.md`：文章模板
+
+---
 
 ## 许可证
 
