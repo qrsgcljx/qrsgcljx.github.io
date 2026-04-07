@@ -327,7 +327,7 @@ body {
 
 .collapsible-content.active {
     padding: 20px;
-    max-height: 500px;
+    max-height: 2000px;
 }
 
 .post-title {
