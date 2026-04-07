@@ -18,6 +18,21 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// 可收缩部分交互
+window.addEventListener('DOMContentLoaded', function() {
+    const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+    
+    collapsibleHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const btn = this.querySelector('.collapsible-btn');
+            
+            content.classList.toggle('active');
+            btn.classList.toggle('active');
+        });
+    });
+});
+
 // 页面加载动画
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
