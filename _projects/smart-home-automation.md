@@ -1,24 +1,19 @@
-***
-
+---
 title: 基于stm32f103的freertos+mqtt物联网环境检测系统
-
 date: 2026-04-06
-
 technologies:
-
-- ESP32
-- Arduino
-- MQTT
-- Home Assistant
-- Sensors
-  excerpt: 基于stm32f103的freertos+mqtt物联网环境检测系统。
-  links:
-- title: GitHub仓库
-  url: <https://github.com/qrsqgljx/smart-home>
-- title: 项目文档
-  url: /projects/smart-home-automation/
-
-***
+  - ESP32
+  - Arduino
+  - MQTT
+  - Home Assistant
+  - Sensors
+excerpt: 基于stm32f103的freertos+mqtt物联网环境检测系统。
+links:
+  - title: GitHub仓库
+    url: https://github.com/qrsgcljx/smart-home
+  - title: 项目文档
+    url: /projects/smart-home-automation/
+---
 
 # 智能家居自动化系统
 
