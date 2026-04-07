@@ -97,7 +97,7 @@ bundle exec jekyll serve
 
 ### 3) 发布到了错误分支
 
-脚本现在会自动使用你当前分支（例如 `master` 或 `main`），并在首次推送时自动设置上游分支。
+脚本默认发布到 `main` 分支（无论你当前在 `master` 还是 `main`）。
 
 ---
 

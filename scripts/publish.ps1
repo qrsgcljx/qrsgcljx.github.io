@@ -1,5 +1,6 @@
 $ErrorActionPreference = "Stop"
 
+$Branch = "main"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $commitMessage = "blog: update content ($timestamp)"
 
@@ -9,11 +10,6 @@ Set-Location $root
 Write-Host "Checking Git..." -ForegroundColor Yellow
 git --version | Out-Null
 if ($LASTEXITCODE -ne 0) { throw "Git is not available." }
-
-$Branch = (git branch --show-current).Trim()
-if ([string]::IsNullOrWhiteSpace($Branch)) {
-    throw "Cannot detect current branch."
-}
 
 Write-Host "Staging changes..." -ForegroundColor Yellow
 git add .
@@ -30,7 +26,7 @@ git commit -m $commitMessage
 if ($LASTEXITCODE -ne 0) { throw "git commit failed." }
 
 Write-Host "Pushing to origin/$Branch ..." -ForegroundColor Yellow
-git push -u origin $Branch
+git push -u origin HEAD:$Branch
 if ($LASTEXITCODE -ne 0) { throw "git push failed." }
 
 Write-Host ""
