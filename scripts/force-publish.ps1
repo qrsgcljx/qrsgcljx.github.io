@@ -32,13 +32,7 @@ else {
 }
 
 Write-Host "Pushing to origin/$Branch ..." -ForegroundColor Yellow
-git rev-parse --abbrev-ref --symbolic-full-name "@{u}" *> $null
-if ($LASTEXITCODE -eq 0) {
-    git push origin $Branch
-}
-else {
-    git push -u origin $Branch
-}
+git push -u origin $Branch
 if ($LASTEXITCODE -ne 0) { throw "git push failed." }
 
 Write-Host ""
