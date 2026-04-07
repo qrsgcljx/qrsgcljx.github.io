@@ -1,6 +1,5 @@
 $ErrorActionPreference = "Stop"
 
-$Branch = "main"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $commitMessage = "blog: update content ($timestamp)"
 
@@ -9,9 +8,16 @@ Set-Location $root
 
 Write-Host "Checking Git..." -ForegroundColor Yellow
 git --version | Out-Null
+if ($LASTEXITCODE -ne 0) { throw "Git is not available." }
+
+$Branch = (git branch --show-current).Trim()
+if ([string]::IsNullOrWhiteSpace($Branch)) {
+    throw "Cannot detect current branch."
+}
 
 Write-Host "Staging changes..." -ForegroundColor Yellow
 git add .
+if ($LASTEXITCODE -ne 0) { throw "git add failed." }
 
 git diff --cached --quiet
 if ($LASTEXITCODE -eq 0) {
@@ -21,9 +27,17 @@ if ($LASTEXITCODE -eq 0) {
 
 Write-Host "Creating commit..." -ForegroundColor Yellow
 git commit -m $commitMessage
+if ($LASTEXITCODE -ne 0) { throw "git commit failed." }
 
 Write-Host "Pushing to origin/$Branch ..." -ForegroundColor Yellow
-git push origin $Branch
+git rev-parse --abbrev-ref --symbolic-full-name "@{u}" *> $null
+if ($LASTEXITCODE -eq 0) {
+    git push origin $Branch
+}
+else {
+    git push -u origin $Branch
+}
+if ($LASTEXITCODE -ne 0) { throw "git push failed." }
 
 Write-Host ""
 Write-Host "Publish complete. GitHub Pages is building." -ForegroundColor Green

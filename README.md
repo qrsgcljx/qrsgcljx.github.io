@@ -97,7 +97,7 @@ bundle exec jekyll serve
 
 ### 3) 发布到了错误分支
 
-请把 `scripts/publish.ps1` 里的 `$Branch` 改成你的发布分支（默认是 `main`）。
+脚本现在会自动使用你当前分支（例如 `master` 或 `main`），并在首次推送时自动设置上游分支。
 
 ---
 
